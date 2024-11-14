@@ -61,17 +61,15 @@ class Game:
         return res
 
     def equals(self, game):
-        another_board_agents = game.agents
-        if len(another_board_agents) != len(self.agents):
-            return False
-        for x in range(len(another_board_agents)):
-            if another_board_agents[x] != self.agents[x]:
-                return False
+        for row in range(len(game.board)):
+           for col in range(len(game.board[row])):
+               if game.board[row][col][0] != self.board[row][col][0] or game.board[row][col][1] != self.board[row][col][1]:
+                   return False
         return True
 
     def is_solved(self):
         if not self.agents:
-            return True
+            return True and self.playable
         return False
 
     def mark_unmovable_agents(self,direction):
@@ -220,9 +218,7 @@ class Game:
             game_copy.reset_unmovable_agents()
             return game_copy
         else :
-            print('You Can\'t Move ❌, You Lost 😓')
             return self
-
     def next_steps(self):
         steps = []
         directions = ['left','right','up','down']

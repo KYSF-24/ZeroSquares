@@ -1,40 +1,24 @@
 from boardloader import BoardLoader
 from game import Game
-file = open('Levels/level_26.txt', 'r')
+from solver import Solver
+from state import State
+file = open('Levels/level_21.txt', 'r')
 board = BoardLoader.transform_board_from_file_to_2d_list(file)
 game = Game(board)
-game.display_board()
-# print(game.equals(game.move("up")))
-# game.move("up").display_board()
-# game.move("up").move("left").display_board()
-# game.move("up").move("left").display_board()
-# game.move("up").move("left").move("up").display_board()
-# game.move("up").move("left").move("up").move("right").display_board()
-# game.move("up").move("left").move("up").move("right").move("down").display_board()
-# game.move("up").move("left").move("up").move("right").move("down").move("up").display_board()
-# game.move("up").move("left").move("up").move("right").move("down").move("up").move("left").display_board()
-# game.move("up").move("left").move("up").move("right").move("down").move("up").move("left").move("down").display_board()
-# game.move("up").move("left").move("up").move("right").move("down").move("up").move("left").move("down").move("right").display_board()
-# game.move("up").move("left").move("up").move("right").move("down").move("up").move("left").move("down").move("right").move("up").display_board()
-# game.move("up").move("left").move("up").move("right").move("down").move("up").move("left").move("down").move("right").move("up").move("down").display_board()
-# game.move("up").move("left").move("up").move("right").move("down").move("up").move("left").move("down").move("right").move("up").move("down").move("left").display_board()
-# game.move("up").move("left").move("up").move("right").move("down").move("up").move("left").move("down").move("right").move("up").move("down").move("left").move("up").display_board()
-# print(game.move("up").move("left").move("up").move("right").move("down").move("up").move("left").move("down").move("right").move("up").move("down").move("left").move("up").is_solved())
-# print(game.agents)
-while not game.is_solved():
-    direction = input("direction : ")
-    if direction not in ["left","right","up",'down']:
-        break
-    game = game.move(direction)
-    if not game.playable:
-        break
-    game.display_board()
-if game.playable:
-    print("You Win Bro 🏆")
-else: print("Game Over 💀")
-# for direction , game_ in game.next_steps():
-#     print(f"If We Moved {direction} , We Get This Board : ")
-#     print(game_)
-
-
-
+s0 = State(game)
+solver = Solver(s0)
+print("Solving Using DFS")
+for state in solver.dfs()[0]:
+    print(state.game)
+print(len(solver.dfs()[1]))
+print("Visited Path")
+for state in solver.dfs()[1]:
+    print(state.game)
+print("\n\n\n")
+print("Solving Using BFS")
+for state in solver.bfs()[0]:
+    print(state.game)
+print("Visited Path")
+for state in solver.bfs()[1]:
+    print(state.game)
+print(len(solver.bfs()[1]))

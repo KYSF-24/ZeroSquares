@@ -1,9 +1,7 @@
-nn nn nn ## ## ## nn nn nn nn nn
-nn nn nn ## nB ## ## ## ## ## ##
-## ## ## ## nn nn nn nn nn nn ##
-## nR ## nn nn nn nn ## nn nn ##
-## nn nn bn nn nn nn nn nn nn ##
-## nn nn nn nn nn ## nn nn nn ##
-## nn nn rn nn ## ## ## ## ## ##
-## nn nn nn nn ## nn nn nn nn nn
-## ## ## ## ## ## nn nn nn nn nn
+## ## ## ## ## ##
+## rn nn nn nn ##
+## nn ## ## nn ##
+## nn ## ## nn ##
+## nn ## ## nn ##
+## nn nn nn nR ##
+## ## ## ## ## ##
