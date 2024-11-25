@@ -225,5 +225,14 @@ class Game:
         directions = ['left','right','up','down']
         for x in range(4):
             if not self.equals(self.move(directions[x])):
-                steps.append([directions[x],self.move(directions[x])])
+                steps.append([directions[x],self.move(directions[x]),self.cost(directions[x])])
         return steps
+
+    def cost(self , direction):
+        c = 0
+        game_copy = self.deep_copy()
+        game_copy.mark_unmovable_agents(direction)
+        for agent in game_copy.agents:
+            if agent[2]:
+                c += 1
+        return c
