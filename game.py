@@ -219,6 +219,7 @@ class Game:
             return game_copy
         else :
             return self
+
     def next_steps(self):
         steps = []
         directions = ['left','right','up','down']

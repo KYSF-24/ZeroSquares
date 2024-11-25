@@ -25,6 +25,7 @@ class Solver:
             for next_state in state.next_states():
                 if not Solver.is_visited(vis, next_state):
                     st.append(next_state)
+
     def bfs(self):
         q = [self.s0]
         vis = list()
@@ -42,3 +43,23 @@ class Solver:
             for next_state in state.next_states():
                 if not Solver.is_visited(vis,next_state):
                     q.append(next_state)
+
+    def recursive_dfs(self, state, vis = None, path  = None):
+        if vis is None:
+            vis = []
+        if path is None:
+            path = []
+        vis.append(state)
+        path.append(state)
+        if state.game.is_solved():
+            return path , vis
+        for next_state in state.next_states():
+            if not Solver.is_visited(vis,next_state):
+                l_path , l_vis = self.recursive_dfs(next_state , vis , path)
+                if l_path:
+                    return l_path , l_vis
+        path.pop()
+        return [] , vis
+
+
+
