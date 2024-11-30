@@ -65,7 +65,7 @@ class Solver:
     def ucs(self):
         """
            Default Approach Where The Cost Of Any Action (Move From State To State)
-           Is Equal To One(1) , In This Case The UCS <-> BFS Because The Weights
+           Is Equal To One (1) , In This Case The UCS <-> BFS Because The Weights
            Are All Equal Between All States , Which Is Equivalent To Not Having
            Weights At All (So BFS).
         """
