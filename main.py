@@ -2,7 +2,7 @@ from boardloader import BoardLoader
 from game import Game
 from solver import Solver
 from state import State
-file = open('Levels/level_25.txt')
+file = open('Levels/level_9.txt')
 board = BoardLoader.transform_board_from_file_to_2d_list(file)
 game = Game(board)
 s0 = State(game)
@@ -15,12 +15,12 @@ solver = Solver(s0)
 # print("A* Path Cost : " , solver.astar()[2])
 # print("A* Vis Len : " , solver.astar()[1])
 
-print("UCS Path : ")
-for state in solver.ucs()[0]:
-    print(state.game)
-print("UCS Visited List : ",solver.ucs()[1])
-
-print("UCS Cost : " , solver.ucs()[2])
+# print("UCS Path : ")
+# for state in solver.ucs()[0]:
+#     print(state.game)
+# print("UCS Visited List : ",solver.ucs()[1])
+#
+# print("UCS Cost : " , solver.ucs()[2])
 
 # print("\n\n\n")
 #
