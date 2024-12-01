@@ -120,7 +120,7 @@ class Solver:
 
 
     def astar(self):
-        pq = [(self.s0 , self.s0.game.h_cost(method='ed') + self.s0.g_cost)]
+        pq = [(self.s0 , self.s0.game.h_cost(method='md') + self.s0.g_cost)]
         vis = list()
         path = list()
         while pq:
@@ -136,5 +136,22 @@ class Solver:
                 for next_state in state.next_states():
                     if not Solver.is_visited(vis,next_state):
                         next_state.g_cost += state.g_cost
-                        pq.append((next_state , next_state.game.h_cost(method='ed') + next_state.g_cost))
+                        pq.append((next_state , next_state.game.h_cost(method='md') + next_state.g_cost))
                 pq.sort(key=lambda t:t[1])
+    def hill_climbing(self):
+        current_state = self.s0
+        path = list()
+        while True:
+            path.append(current_state)
+            neighbors = current_state.next_states()
+            if not neighbors:
+                break
+            best_neighbor = neighbors[0]
+            for neighbor in neighbors:
+                if neighbor.game.h_cost() < best_neighbor.game.h_cost():
+                    best_neighbor = neighbor
+            if best_neighbor.game.h_cost() < current_state.game.h_cost():
+                current_state = best_neighbor
+            else:
+                break  # No improvement, stop climbing
+        return path
