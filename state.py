@@ -1,9 +1,9 @@
 # This Is A Wrapper Class For The Game Class For Higher Abstraction And More Understanding
 class State:
-    def __init__(self , game , parent = None , cost = 0):
+    def __init__(self , game , parent = None , g_cost = 0):
         self.game = game
         self.parent = parent
-        self.cost = cost
+        self.g_cost = g_cost
 
     def next_states(self):
         next_states = []

@@ -1,3 +1,6 @@
+import math
+
+
 class Game:
 
     def __init__(self, board):
@@ -225,10 +228,10 @@ class Game:
         directions = ['left','right','up','down']
         for x in range(4):
             if not self.equals(self.move(directions[x])):
-                steps.append([directions[x],self.move(directions[x]),self.cost(directions[x])])
+                steps.append([directions[x],self.move(directions[x]),self.g_cost(directions[x])])
         return steps
 
-    def cost(self , direction):
+    def g_cost(self , direction):
         c = 0
         game_copy = self.deep_copy()
         game_copy.mark_unmovable_agents(direction)
@@ -236,3 +239,28 @@ class Game:
             if agent[2]:
                 c += 1
         return c
+
+    def h_cost(self , method = 'md'):
+        def manhattan_distance():
+            md  = 0
+            for i in range(len(self.board)):
+                for j in range(len(self.board[i])):
+                    if self.board[i][j][1].isalpha() and self.board[i][j][1].isupper():
+                        for agent in self.agents:
+                            if self.board[i][j][1] == self.board[agent[0]][agent[1]][0].upper():
+                                md += abs(i - agent[0]) + abs(j - agent[1])
+                                break
+            return md
+        def euclidean_distance():
+            ed  = 0
+            for i in range(len(self.board)):
+                for j in range(len(self.board[i])):
+                    if self.board[i][j][1].isalpha() and self.board[i][j][1].isupper():
+                        for agent in self.agents:
+                            if self.board[i][j][1] == self.board[agent[0]][agent[1]][0].upper():
+                                ed += math.sqrt(pow((i - agent[0]) , 2) + pow(abs(j - agent[1]),2))
+                                break
+            return ed
+        fn = {'md':manhattan_distance ,'ed':euclidean_distance}
+        return fn[method]()
+

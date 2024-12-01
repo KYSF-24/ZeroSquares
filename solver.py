@@ -81,7 +81,7 @@ class Solver:
                         path.append(state)
                         state = state.parent
                     path = path[::-1]
-                    return path , vis , cost
+                    return path , len(vis) , cost
                 for next_state in state.next_states():
                     if not Solver.is_visited(vis , next_state):
                         pq.append((next_state,1 + cost))
@@ -100,7 +100,7 @@ class Solver:
               Useful For Later Algorithms That Demands Different Weights Like A* For
               Example.
         """
-        pq = [(self.s0 , self.s0.cost)]
+        pq = [(self.s0 , self.s0.g_cost)]
         vis = list()
         path = list()
         while pq:
@@ -115,5 +115,26 @@ class Solver:
                     return path , vis , cost
                 for next_state in state.next_states():
                     if not Solver.is_visited(vis, next_state):
-                        pq.append((next_state,cost + next_state.cost))
+                        pq.append((next_state,cost + next_state.g_cost))
                 pq.sort(key=lambda t: t[1])
+
+
+    def astar(self):
+        pq = [(self.s0 , self.s0.game.h_cost(method='ed') + self.s0.g_cost)]
+        vis = list()
+        path = list()
+        while pq:
+            state , f_cost = pq.pop(0)
+            if not Solver.is_visited(vis , state):
+                vis.append(state)
+                if state.game.is_solved():
+                    while state:
+                        path.append(state)
+                        state = state.parent
+                    path.reverse()
+                    return path , len(vis) , f_cost
+                for next_state in state.next_states():
+                    if not Solver.is_visited(vis,next_state):
+                        next_state.g_cost += state.g_cost
+                        pq.append((next_state , next_state.game.h_cost(method='ed') + next_state.g_cost))
+                pq.sort(key=lambda t:t[1])
