@@ -8,12 +8,12 @@ game = Game(board)
 s0 = State(game)
 solver = Solver(s0)
 
-# print("A* Path : ")
-# for state in solver.astar()[0]:
-#     print(state.game)
-#
-# print("A* Path Cost : " , solver.astar()[2])
-# print("A* Vis Len : " , solver.astar()[1])
+print("A* Path : ")
+for state in solver.astar()[0]:
+    print(state.game)
+
+print("A* Path Cost : " , solver.astar()[2])
+print("A* Vis Len : " , solver.astar()[1])
 
 # print("UCS Path : ")
 # for state in solver.ucs()[0]:
