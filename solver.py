@@ -155,3 +155,17 @@ class Solver:
             else:
                 break  # No improvement, stop climbing
         return path
+    def simple_hill_climbing(self):
+        current_state = self.s0
+        path = list()
+        while True:
+            path.append(current_state)
+            neighbors = current_state.next_states()
+            if not neighbors:
+                break
+            best_neighbor = neighbors[0]
+            if best_neighbor.game.h_cost() < current_state.game.h_cost():
+                current_state = best_neighbor
+            else:
+                break  # No improvement, stop climbing
+        return path
