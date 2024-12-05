@@ -138,7 +138,7 @@ class Solver:
                         next_state.g_cost += state.g_cost
                         pq.append((next_state , next_state.game.h_cost(method='md') + next_state.g_cost))
                 pq.sort(key=lambda t:t[1])
-    def hill_climbing(self):
+    def steepest_hill_climbing(self):
         current_state = self.s0
         path = list()
         while True:
